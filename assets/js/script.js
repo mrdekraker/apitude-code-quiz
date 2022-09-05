@@ -2,40 +2,21 @@
 const landing = document.querySelector(`.landing`);
 const quiz = document.querySelector(`.quiz`);
 const startBtn = document.querySelector(`.startBtn`);
-// !QUESTION DISPLAYS
+const timer = document.querySelector(`.timer`);
+// *QUIZ ELEMENTS
 const questionDisplay = document.querySelector(`.question-display`);
 const answers = Array.from(document.getElementsByClassName(`answer-items`));
-const answerList = document.querySelector(`.answer-list`);
+const results = document.querySelector(`.result`);
 let currentQuestion = {};
-const acceptingAnswers = true;
-let score = 0;
 let questionCounter = 0;
-let availableQuestions = [];
-// !TIMER VARIABLES
-const timer = document.querySelector(`.timer`);
-const time = availableQuestions.length * 15;
+let score = 0;
+let acceptingAnswers = true;
+const availableQuestions = questions;
+let time = availableQuestions.length * 15;
+let timeLeft = time;
 
-// !GAME MECHANICS
-const BONUS = 10;
-const MAX_QUESTIONS = 5;
-
-// GET NEW QUESTIONS
-function getNewQuestion() {
-    questionCounter += 1;
-    const questionIndex = Math.floor(Math.random() * availableQuestions.length);
-    currentQuestion = availableQuestions[questionIndex];
-    questionDisplay.textContent = currentQuestion.question;
-
-    answers.forEach((answer, i) => {
-        // const number = answer.dataset.numbers;
-        const answerDisplay = answers[i].textContent;
-        answer.textContent = currentQuestion.answers[i];
-    });
-}
-
+// !TIMER FUNCTION
 function timerCountdown() {
-    let timeLeft = time;
-
     const timeInterval = setInterval(() => {
         if (timeLeft > 1) {
             timer.textContent = `Time: ${timeLeft}s`;
@@ -49,7 +30,49 @@ function timerCountdown() {
         }
     }, 1000);
 }
+// !GENERATE A NEW QUESTION
+function getNewQuestion() {
+    // Increase question counter, grab a random question
+    questionCounter += 1;
+    const questionIndex = Math.floor(Math.random() * availableQuestions.length);
+    currentQuestion = availableQuestions[questionIndex];
 
+    // Display Questions and Answers
+    questionDisplay.textContent = currentQuestion.question;
+
+    answers.forEach((answer, i) => {
+        const number = parseInt(answer.dataset.numbers);
+
+        // const answerDisplay = answers[i].textContent;
+        answer.textContent = currentQuestion.answers[i];
+
+        acceptingAnswers = true;
+
+        availableQuestions.splice(questionIndex, 1);
+
+        answer.addEventListener(`click`, () => {
+            const clickedAnswer = currentQuestion.answer;
+            if (number === clickedAnswer) {
+                console.log(`true`);
+            } else {
+                // penalize time
+                time -= 15;
+                if (time < 0) {
+                    time = 0;
+                }
+                results.classList.remove(`hide`);
+                results.textContent = `Incorrect!`;
+
+                results.style.color(`red`);
+                console.log(`false`);
+            }
+            // console.log(clickedAnswer);
+        });
+    });
+    // console.log(currentQuestion);
+}
+
+// !START QUIZ
 function startGame() {
     startBtn.addEventListener(`click`, () => {
         landing.classList.add(`hide`);
@@ -58,7 +81,6 @@ function startGame() {
     });
     questionCounter = 0;
     score = 0;
-    availableQuestions = [...questions];
     getNewQuestion();
 }
 

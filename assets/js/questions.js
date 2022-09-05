@@ -91,7 +91,7 @@ const questions = [
         answer: 2,
     },
     {
-        question: `What will be the output of the following code snippet? print(typeof(NaN));`,
+        question: `What will be the output of the following code snippet? console.log(typeof(NaN));`,
         answers: [`true`, `Number`, `String`, `None of the Above`],
         answer: 2,
     },
