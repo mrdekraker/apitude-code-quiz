@@ -25,6 +25,7 @@ body {
 
 .wrapper {
   display: flex;
+  padding: 2rem;
 }
 
 /* NAVIGATION STYLES */
@@ -101,8 +102,8 @@ body {
 
 /* !QUIZ SECTION */
 .questions {
-  margin: 8% auto;
-  max-width: 800px;
+  margin: 2% auto;
+  width: 75%;
   padding: 1% 2%;
   background: rgba(0, 0, 0, 0.3);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -110,34 +111,35 @@ body {
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.question-title {
+.question-display {
   border-bottom: 2px solid black;
-  font-size: 48px;
+  font-size: 28px;
   justify-content: left;
   align-content: left;
   padding: 2% 0;
 }
 
 .answers {
-  display: flex;
+  /* display: flex; */
   justify-content: left;
   list-style-position: inside;
   font-weight: bold;
   /* border: 2px solid blue; */
-  font-size: 32px;
+  font-size: 24px;
   /* padding: 2% 0; */
   margin: 3% 0;
 }
 
-.list-items {
-  width: 100%;
+.answer-items {
+  /* border: 2px solid orange; */
   margin: 3% 0;
-  padding: 0 5%;
+  padding: 0 1%;
   border-radius: 15px;
-  background: #28666e;
+  background: rgba(40, 102, 110, 0.7);
+  width: 75%;
 }
 
-.list-items:hover {
+.answer-items:hover {
   cursor: pointer;
   background: #7fffd4;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,

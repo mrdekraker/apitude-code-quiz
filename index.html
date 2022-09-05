@@ -17,7 +17,7 @@
     <header id="show">
         <nav class="wrapper navbar">
           <a class="box1" href="#">View Highscores</a>
-          <div class="box2" data-state="show"><span class="timer">Ready?</span></div>
+          <div class="box2"><span class="timer">Ready?</span></div>
         </nav>
       </div>
     </header>
@@ -25,20 +25,20 @@
     <main class="wrapper landing">
       <div class="landingPage" id="landing">
         <h1><span class="api-color">API</span>tutde Quiz Challenege</h1>
-        <p>Let's see what you know! Following are some code-related questions. All incorrect answers incur a 10 second penalty. Don't worry! You can take the quiz as many times as you like.</p>
+        <p>Let's see what you know! Following are some JavaScript code-related questions. All incorrect answers incur a 10 second penalty. Don't worry! You can take the quiz as many times as you like.</p>
         <button class="startBtn" id="button">Start Quiz</button>
       </div>
     </main>
 
     <section class="wrapper quiz hide">
       <div class="questions" id="quiz">
-        <h2 class="question-title" id="question-title">Long extravagant question goes here. This is awesome placeholder text.</h2>
-        <div class="answers" id="answers">
-          <ol>
-            <li class="list-items" id="li1">She's got a smile that seems to me</li>
-            <li class="list-items" id="li2">Reminds me of childhood memories</li>
-            <li class="list-items" id="li3">I like pepperoni</li>
-            <li class="list-items" id="li4">And sweet strawberry shortcake, yessir</li>
+        <h2 class="question-display" id="question-display">What is the answer to this question?</h2>
+        <div class="answers">
+          <ol class="answer-list">
+            <li class="answer-items" data-numbers="1">She's got a smile that seems to me</li>
+            <li class="answer-items" data-numbers="2">Reminds me of childhood memories</li>
+            <li class="answer-items" data-numbers="3">I like pepperoni</li>
+            <li class="answer-items" data-numbers="4">And sweet strawberry shortcake, yessir</li>
           </ol>
         </div>
         <div class="result" id="result"></div>
