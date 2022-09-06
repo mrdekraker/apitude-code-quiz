@@ -21,6 +21,15 @@
         </nav>
       </div>
     </header>
+
+    <section class="wrapper hide" id="hud">
+      <div class="hud">
+        <h1>Question: <span class="questionHUD"></span></h1>
+      </div>
+      <div class="hud">
+        <h1>Score: <span class="scoreHUD">0</span></h1>
+      </div>
+    </section>
     
     <main class="wrapper landing">
       <div class="landingPage" id="landing">
@@ -42,6 +51,26 @@
           </ol>
         </div>
         <div class="result hide" id="result"></div>
+      </div>
+    </section>
+
+    <section class="wrapper">
+      <div class="endGame hide">
+        <h1>Final Score!</h1>
+        <p>Your final score is <span class="finalScore">0.</span></p>
+        <p>Enter initials: <input type="text" id="initials" maxlength="3" />
+          <button disabled class="submitBtn" id="submitBtn">Submit</button>
+        </p>
+      </div>
+    </section>
+
+    <section class="wrapper">
+      <div class="topScores hide">
+        <h1>TOP SCORES</h1>
+        <ul class="topScoresList">
+        </ul>
+        <button class="tryAgain" id="tryAgain">Try Again?</button>
+        </p>
       </div>
     </section>
 

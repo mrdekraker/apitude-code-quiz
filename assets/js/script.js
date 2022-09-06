@@ -1,87 +1,151 @@
-// !DOM ELEMENTS
 const landing = document.querySelector(`.landing`);
 const quiz = document.querySelector(`.quiz`);
+const endGame = document.querySelector(`.endGame`);
 const startBtn = document.querySelector(`.startBtn`);
-const timer = document.querySelector(`.timer`);
-// *QUIZ ELEMENTS
+const submitBtn = document.querySelector(`.submitBtn`);
+const topScore = document.querySelector(`.topScores`);
+const tryAgainBtn = document.querySelector(`.tryAgain`);
+
 const questionDisplay = document.querySelector(`.question-display`);
+const result = document.querySelector(`.result`);
+const hud = document.querySelector(`#hud`);
+const scoreHUD = document.querySelector(`.scoreHUD`);
+const finalScore = document.querySelector(`.finalScore`);
+const questionHUD = document.querySelector(`.questionHUD`);
+
 const answers = Array.from(document.getElementsByClassName(`answer-items`));
-const results = document.querySelector(`.result`);
 let currentQuestion = {};
-let questionCounter = 0;
-let score = 0;
+const maxQuestions = 5;
 let acceptingAnswers = true;
-const availableQuestions = questions;
-let time = availableQuestions.length * 15;
-let timeLeft = time;
+let score = 0;
+const bonusPts = 10;
+const maxHighScore = 5;
+const highScores = JSON.parse(localStorage.getItem(`highScores`)) || [];
+const mostRecentScore = localStorage.getItem(`mostRecentScore`);
+let questionCounter = 0;
+const availableQuestions = [...questions];
+const username = document.getElementById(`initials`);
 
-// !TIMER FUNCTION
-function timerCountdown() {
-    const timeInterval = setInterval(() => {
-        if (timeLeft > 1) {
-            timer.textContent = `Time: ${timeLeft}s`;
-            timeLeft -= 1;
-        } else if (timeLeft === 1) {
-            timer.textContent = `Time: ${timeLeft}s`;
-            timeLeft -= 1;
-        } else {
-            timer.textContent = `Time is up!`;
-            clearInterval(timeInterval);
-        }
-    }, 1000);
+// SET THE SCORES
+function scoreUpdate(num) {
+    score += num;
+    scoreHUD.textContent = score;
 }
-// !GENERATE A NEW QUESTION
-function getNewQuestion() {
-    // Increase question counter, grab a random question
-    questionCounter += 1;
-    const questionIndex = Math.floor(Math.random() * availableQuestions.length);
-    currentQuestion = availableQuestions[questionIndex];
 
-    // Display Questions and Answers
+function getNewQuestion() {
+    if (availableQuestions.length === 0 || questionCounter >= maxQuestions) {
+        localStorage.setItem(`mostRecentScore`, score);
+        //  TODO: CHANGE SCREEN TO REFLECT FINAL SCREEN PROCESS
+        finalScore.textContent = `${score}.`;
+        console.log(`GAME OVER!`);
+        quiz.classList.add(`hide`);
+        endGame.classList.remove(`hide`);
+        return;
+    }
+    questionCounter += 1;
+    questionHUD.textContent = `${questionCounter}/${maxQuestions}`;
+
+    // Grab a random Question and display bot question and answers
+    const questionIndex = Math.floor(Math.random() * questions.length);
+    currentQuestion = questions[questionIndex];
     questionDisplay.textContent = currentQuestion.question;
 
     answers.forEach((answer, i) => {
-        const number = parseInt(answer.dataset.numbers);
-
-        // const answerDisplay = answers[i].textContent;
+        // const number = parseInt(answer.dataset.numbers);
         answer.textContent = currentQuestion.answers[i];
-
-        acceptingAnswers = true;
-
-        availableQuestions.splice(questionIndex, 1);
-
-        answer.addEventListener(`click`, () => {
-            const clickedAnswer = currentQuestion.answer;
-            if (number === clickedAnswer) {
-                console.log(`true`);
-            } else {
-                // penalize time
-                time -= 15;
-                if (time < 0) {
-                    time = 0;
-                }
-                results.classList.remove(`hide`);
-                results.textContent = `Incorrect!`;
-
-                results.style.color(`red`);
-                console.log(`false`);
-            }
-            // console.log(clickedAnswer);
-        });
     });
-    // console.log(currentQuestion);
+
+    availableQuestions.splice(currentQuestion, 1);
+
+    acceptingAnswers = true;
 }
 
-// !START QUIZ
+answers.forEach((answer) => {
+    answer.addEventListener(`click`, (e) => {
+        if (!acceptingAnswers) return;
+
+        acceptingAnswers = false;
+        const selectChoice = e.target;
+        const selectedAnswer = parseInt(selectChoice.dataset.numbers);
+
+        const results = selectedAnswer === currentQuestion.answer;
+        // ternary: if something is true apply : if not true apply
+        const resultsClass = selectedAnswer === currentQuestion.answer ? `answer-right` : `answer-wrong`;
+
+        selectChoice.classList.add(resultsClass);
+
+        // IF (statement === true: display correct info) else if (statement === false: display incorrect info) else (display other info)
+        if (results === true) {
+            result.classList.remove(`hide`);
+            result.textContent = `Correct!`;
+            result.style.color = `green`;
+            scoreUpdate(bonusPts);
+            setTimeout(() => {
+                result.style.color = ``;
+                result.classList.add(`hide`);
+                selectChoice.classList.remove(resultsClass);
+                console.log(`display correct`);
+                getNewQuestion();
+            }, 1000);
+        } else {
+            result.classList.remove(`hide`);
+            result.textContent = `Incorrect!`;
+            result.style.color = `red`;
+            setTimeout(() => {
+                result.style.color = ``;
+                result.classList.add('hide');
+                selectChoice.classList.remove(resultsClass);
+                console.log(`display false//go back to neutral`);
+                getNewQuestion();
+            }, 1000);
+        }
+    });
+});
+
+// SUBMIT AND SAVE HIGHSCORE
+username.addEventListener(`keyup`, () => {
+    submitBtn.disabled = !username.value;
+});
+
+submitBtn.addEventListener(`click`, (e) => {
+    const { target } = e;
+    e.preventDefault();
+
+    const scoreSubmit = {
+        // score: mostRecentScore,
+        score,
+        name: username.value,
+    };
+    highScores.push(scoreSubmit);
+    highScores.sort((a, b) => b.score - a.score);
+    highScores.splice(maxHighScore);
+
+    localStorage.setItem(`highScores`, JSON.stringify(highScores));
+    console.log(highScores);
+
+    endGame.classList.add(`hide`);
+    topScore.classList.remove(`hide`);
+});
+
+// DISPLAY HIGH SCORES
+tryAgainBtn.addEventListener(`click`, () => {
+    console.log(`clicked tryAgainBtn`);
+    localStorage.removeItem(`mostRecentScore`);
+    topScore.classList.add(`hide`);
+    landing.classList.remove(`hide`);
+});
+
+// Starts the Quiz
 function startGame() {
+    localStorage.removeItem(`mostRecentScore`);
     startBtn.addEventListener(`click`, () => {
+        questionCounter = 0;
+        score = 0;
+        getNewQuestion();
         landing.classList.add(`hide`);
         quiz.classList.remove(`hide`);
-        timerCountdown();
+        hud.classList.remove(`hide`);
     });
-    questionCounter = 0;
-    score = 0;
-    getNewQuestion();
 }
 
 startGame();
