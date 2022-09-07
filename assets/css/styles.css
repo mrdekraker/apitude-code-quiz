@@ -137,7 +137,7 @@ body {
   /* display: flex; */
   justify-content: left;
   list-style-position: inside;
-  font-weight: normal;
+  font-weight: bold;
   /* border: 2px solid blue; */
   font-size: 24px;
   /* padding: 2% 0; */
@@ -155,7 +155,7 @@ body {
 
 .answer-items:hover {
   cursor: pointer;
-  background: rgb(127, 255, 212, 0.6);
+  background: #7fffd4;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -257,11 +257,6 @@ input {
 }
 .topScores h1 {
   font-size: 48px;
-  color: #7fffd4;
-}
-
-.topScores p,
-li {
   color: #7fffd4;
 }
 

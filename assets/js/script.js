@@ -17,7 +17,7 @@ const questionHUD = document.querySelector(`.questionHUD`);
 const answers = Array.from(document.getElementsByClassName(`answer-items`));
 let currentQuestion = {};
 const maxQuestions = 5;
-let canAnswer = true;
+let acceptingAnswers = true;
 let score = 0;
 const bonusPts = 10;
 const maxHighScore = 5;
@@ -31,11 +31,9 @@ const timer = document.querySelector(`.timer`);
 const time = maxQuestions * 12;
 let timeLeft = time;
 let myTimer;
-
 // !TIMER FUNCTION
 
 function timerCountdown() {
-    timeLeft = maxQuestions * 12;
     myTimer = setInterval(() => {
         if (timeLeft > 1) {
             timer.textContent = `Time: ${timeLeft}s`;
@@ -55,17 +53,6 @@ function stopTimeInterval() {
 }
 
 viewHighscore.addEventListener(`click`, () => {
-    topScoresList.innerHTML = highScores
-        .map((scoreList) => `<li class="scoresList">${scoreList.name} - ${scoreList.score}</li>`)
-        .join(``);
-
-    tryAgainBtn.addEventListener(`click`, () => {
-        window.location.reload();
-        localStorage.removeItem(`mostRecentScore`);
-        topScores.classList.add(`hide`);
-        landing.classList.remove(`hide`);
-    });
-
     stopTimeInterval();
     timer.textContent = `Ready?`;
     landing.classList.add(`hide`);
@@ -81,7 +68,7 @@ function scoreUpdate(num) {
 }
 
 function getNewQuestion() {
-    if (availableQuestions.length === 0 || questionCounter >= maxQuestions || timeLeft <= 0) {
+    if (availableQuestions.length === 0 || questionCounter >= maxQuestions || timeLeft === 0) {
         localStorage.setItem(`mostRecentScore`, score);
         finalScore.textContent = `${score}.`;
         stopTimeInterval();
@@ -104,14 +91,15 @@ function getNewQuestion() {
     });
 
     availableQuestions.splice(currentQuestion, 1);
-    canAnswer = true;
+
+    acceptingAnswers = true;
 }
 
 answers.forEach((answer) => {
     answer.addEventListener(`click`, (e) => {
-        if (!canAnswer) return;
+        if (!acceptingAnswers) return;
 
-        canAnswer = false;
+        acceptingAnswers = false;
         const selectChoice = e.target;
         const selectedAnswer = parseInt(selectChoice.dataset.numbers);
 
@@ -168,19 +156,19 @@ submitBtn.addEventListener(`click`, (e) => {
 
     localStorage.setItem(`highScores`, JSON.stringify(highScores));
 
-    // DISPLAY HIGH SCORES
-    topScoresList.innerHTML = highScores
-        .map((scoreList) => `<li class="scoresList">${scoreList.name} - ${scoreList.score}</li>`)
-        .join(``);
-
-    tryAgainBtn.addEventListener(`click`, () => {
-        localStorage.removeItem(`mostRecentScore`);
-        topScores.classList.add(`hide`);
-        landing.classList.remove(`hide`);
-    });
-
     endGame.classList.add(`hide`);
     topScores.classList.remove(`hide`);
+});
+
+// DISPLAY HIGH SCORES
+topScoresList.innerHTML = highScores
+    .map((scoreList) => `<li class="scoresList">${scoreList.name} - ${scoreList.score}</li>`)
+    .join(``);
+
+tryAgainBtn.addEventListener(`click`, () => {
+    localStorage.removeItem(`mostRecentScore`);
+    topScores.classList.add(`hide`);
+    landing.classList.remove(`hide`);
 });
 
 // Starts the Quiz
@@ -194,7 +182,6 @@ function startGame() {
         quiz.classList.remove(`hide`);
         hud.classList.remove(`hide`);
         getNewQuestion();
-        stopTimeInterval();
         timerCountdown();
     });
 }
