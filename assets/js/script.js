@@ -22,7 +22,6 @@ let score = 0;
 const bonusPts = 10;
 const maxHighScore = 5;
 const highScores = JSON.parse(localStorage.getItem(`highScores`)) || [];
-const mostRecentScore = localStorage.getItem(`mostRecentScore`);
 let questionCounter = 0;
 const availableQuestions = [...questions];
 const username = document.getElementById(`initials`);
