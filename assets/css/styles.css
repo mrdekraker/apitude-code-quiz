@@ -1,0 +1,300 @@
+/* BODY STYLES */
+
+* {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Open Sans", "Lucida Grande", "Lucida Sans Unicode",
+    "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans",
+    Verdana, "Verdana Ref", sans-serif;
+  background: #43c6ac; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #191654,
+    #43c6ac
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #191654,
+    #43c6ac
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.wrapper {
+  display: flex;
+  padding: 2rem;
+}
+
+/* NAVIGATION STYLES */
+.navbar {
+  padding: 20px;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.navbar a {
+  color: #31969d;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.navbar a:hover {
+  color: #7fffd4;
+  cursor: pointer;
+}
+
+.box2 {
+  color: #7fffd4;
+}
+
+/* !LANDING PAGE STYLES */
+.api-color {
+  color: #010184;
+}
+
+.landingPage {
+  display: flex;
+  margin: 8% auto;
+  flex-direction: column;
+  max-width: 750px;
+  border: 2px solid black;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  background: rgba(71, 74, 95, 0.8);
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.landingPage h1 {
+  font-size: 48px;
+}
+
+.landingPage p {
+  margin: 20px 0;
+  font-size: 24px;
+}
+
+.startBtn {
+  cursor: pointer;
+  margin: 20px 0;
+  width: 100px;
+  padding: 10px 10px;
+  font-size: 20px;
+  background: #28666e;
+  color: #7fffd4;
+  border: none;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.startBtn:hover {
+  color: #010184;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+/* !QUIZ SECTION */
+#hud {
+  /* border: 2px solid orange; */
+  font-size: 28px;
+  justify-content: space-around;
+  margin: 5% auto;
+  max-width: 600px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #7fffd4;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.questions {
+  margin: 2% auto;
+  width: 800px;
+  padding: 1% 2%;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.question-display {
+  border-bottom: 2px solid black;
+  font-size: 28px;
+  justify-content: left;
+  align-content: left;
+  padding: 2% 0;
+}
+
+.answers {
+  /* display: flex; */
+  justify-content: left;
+  list-style-position: inside;
+  font-weight: normal;
+  /* border: 2px solid blue; */
+  font-size: 24px;
+  /* padding: 2% 0; */
+  margin: 3% 0;
+}
+
+.answer-items {
+  /* border: 2px solid orange; */
+  margin: 3% 0;
+  padding: 0 1%;
+  border-radius: 15px;
+  background: rgba(40, 102, 110, 0.7);
+  width: 75%;
+}
+
+.answer-items:hover {
+  cursor: pointer;
+  background: rgb(127, 255, 212, 0.6);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.answer-wrong {
+  background: rgba(139, 0, 0, 0.7);
+}
+
+.answer-right {
+  background: rgba(0, 100, 0, 0.7);
+}
+.result {
+  font-size: 32px;
+  font-style: italic;
+  border-top: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+/* !SUBMIT FINAL SCORE */
+.endGame {
+  display: flex;
+  margin: auto auto;
+  flex-direction: column;
+  max-width: 750px;
+  border: 2px solid black;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  background: rgba(71, 74, 95, 0.8);
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.endGame h1 {
+  font-size: 48px;
+}
+
+.endGame p {
+  font-size: 28px;
+}
+
+.finalScore {
+  color: #7fffd4;
+}
+
+.submitBtn {
+  cursor: pointer;
+  margin: 20px 0;
+  width: 100px;
+  padding: 10px 10px;
+  font-size: 20px;
+  background: #28666e;
+  color: #7fffd4;
+  border: none;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.submitBtn:hover {
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.submitBtn[disabled]:hover {
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+input {
+  height: 40px;
+  width: 150px;
+  background: rgba(225, 225, 225, 0.1);
+  color: #7fffd4;
+  font-size: 28px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.topScores {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  max-width: 750px;
+  border: 2px solid black;
+  border-radius: 25px;
+  justify-content: center;
+  align-items: center;
+  background: rgba(71, 74, 95, 0.8);
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.topScores h1 {
+  font-size: 48px;
+  color: #7fffd4;
+}
+
+.topScores p,
+li {
+  color: #7fffd4;
+}
+
+.scoresList {
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+}
+.tryAgain {
+  cursor: pointer;
+  margin: 20px 0;
+  width: 100px;
+  padding: 10px 10px;
+  font-size: 20px;
+  background: #28666e;
+  color: #7fffd4;
+  border: none;
+  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
+    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.tryAgain:hover {
+  color: #010184;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.topScoresList {
+  font-size: 28px;
+  list-style: none;
+}
+.hide {
+  display: none;
+}

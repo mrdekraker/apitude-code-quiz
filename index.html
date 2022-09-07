@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web APIs: Code Quiz</title>
+    <!-- !GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+    <!-- !MY STYLES -->
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+
+  <body>
+    <header id="show">
+        <nav class="wrapper navbar">
+          <a class="box1">View Highscores</a>
+          <div class="box2"><span class="timer">Ready?</span></div>
+        </nav>
+      </div>
+    </header>
+
+    <section class="wrapper hide" id="hud">
+      <div class="hud">
+        <h1>Question: <span class="questionHUD"></span></h1>
+      </div>
+      <div class="hud">
+        <h1>Score: <span class="scoreHUD">0</span></h1>
+      </div>
+    </section>
+    
+    <main class="wrapper landing">
+      <div class="landingPage" id="landing">
+        <h1><span class="api-color">API</span>tutde Quiz Challenege</h1>
+        <p>Let's see what you know! Following are some JavaScript code-related questions. All incorrect answers incur a 20 second penalty. You have 60 seconds to complete the 5 question quiz. Don't worry! You can take the quiz as many times as you like.</p>
+        <button class="startBtn" id="button">Start Quiz</button>
+      </div>
+    </main>
+
+    <section class="wrapper quiz hide">
+      <div class="questions" id="quiz">
+        <h2 class="question-display" id="question-display">What is the answer to this question?</h2>
+        <div class="answers">
+          <ol class="answer-list">
+            <li class="answer-items" data-numbers="1">Flow gently, sweet Afton</li>
+            <li class="answer-items" data-numbers="2">Among thy green braes</li>
+            <li class="answer-items" data-numbers="3">Flow gently, I'll sing thee</li>
+            <li class="answer-items" data-numbers="4">A song in thy praise</li>
+          </ol>
+        </div>
+        <div class="result hide" id="result"></div>
+      </div>
+    </section>
+
+    <section class="wrapper">
+      <div class="endGame hide">
+        <h1>Final Score!</h1>
+        <p>Your final score is <span class="finalScore">0.</span></p>
+        <p>Enter initials: <input type="text" id="initials" maxlength="3" />
+          <button disabled class="submitBtn" id="submitBtn">Submit</button>
+        </p>
+      </div>
+    </section>
+
+    <section class="wrapper">
+      <div class="topScores hide">
+        <h1>TOP SCORES</h1>
+        <p>If your intials don't show up, you didn't make the top 5.</p>
+        <ul class="topScoresList">
+        </ul>
+        <button class="tryAgain" id="tryAgain">Try Again?</button>
+        </p>
+      </div>
+    </section>
+
+    <script src="./assets/js/questions.js"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
