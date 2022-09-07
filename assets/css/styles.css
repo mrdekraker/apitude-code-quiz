@@ -43,6 +43,7 @@ body {
 
 .navbar a:hover {
   color: #7fffd4;
+  cursor: pointer;
 }
 
 .box2 {
@@ -259,6 +260,11 @@ input {
   color: #7fffd4;
 }
 
+.scoresList {
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+}
 .tryAgain {
   cursor: pointer;
   margin: 20px 0;

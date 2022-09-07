@@ -3,7 +3,8 @@ const quiz = document.querySelector(`.quiz`);
 const endGame = document.querySelector(`.endGame`);
 const startBtn = document.querySelector(`.startBtn`);
 const submitBtn = document.querySelector(`.submitBtn`);
-const topScore = document.querySelector(`.topScores`);
+const topScores = document.querySelector(`.topScores`);
+const topScoresList = document.querySelector(`.topScoresList`);
 const tryAgainBtn = document.querySelector(`.tryAgain`);
 
 const questionDisplay = document.querySelector(`.question-display`);
@@ -25,6 +26,41 @@ const mostRecentScore = localStorage.getItem(`mostRecentScore`);
 let questionCounter = 0;
 const availableQuestions = [...questions];
 const username = document.getElementById(`initials`);
+const viewHighscore = document.querySelector(`.box1`);
+
+const timer = document.querySelector(`.timer`);
+const time = maxQuestions * 12;
+let timeLeft = time;
+let myTimer;
+// !TIMER FUNCTION
+
+function timerCountdown() {
+    myTimer = setInterval(() => {
+        if (timeLeft > 1) {
+            timer.textContent = `Time: ${timeLeft}s`;
+            timeLeft -= 1;
+        } else if (timeLeft === 1) {
+            timer.textContent = `Time: ${timeLeft}s`;
+            timeLeft -= 1;
+        } else {
+            timer.textContent = `Time is up!`;
+            clearInterval(myTimer);
+        }
+    }, 1000);
+}
+
+function stopTimeInterval() {
+    clearInterval(myTimer);
+}
+
+viewHighscore.addEventListener(`click`, () => {
+    stopTimeInterval();
+    timer.textContent = `Ready?`;
+    landing.classList.add(`hide`);
+    quiz.classList.add(`hide`);
+    endGame.classList.add(`hide`);
+    topScores.classList.remove(`hide`);
+});
 
 // SET THE SCORES
 function scoreUpdate(num) {
@@ -33,11 +69,11 @@ function scoreUpdate(num) {
 }
 
 function getNewQuestion() {
-    if (availableQuestions.length === 0 || questionCounter >= maxQuestions) {
+    if (availableQuestions.length === 0 || questionCounter >= maxQuestions || timeLeft === 0) {
         localStorage.setItem(`mostRecentScore`, score);
-        //  TODO: CHANGE SCREEN TO REFLECT FINAL SCREEN PROCESS
         finalScore.textContent = `${score}.`;
-        console.log(`GAME OVER!`);
+        stopTimeInterval();
+        timer.textContent = `Time is up!`;
         quiz.classList.add(`hide`);
         endGame.classList.remove(`hide`);
         return;
@@ -84,10 +120,10 @@ answers.forEach((answer) => {
                 result.style.color = ``;
                 result.classList.add(`hide`);
                 selectChoice.classList.remove(resultsClass);
-                console.log(`display correct`);
                 getNewQuestion();
             }, 1000);
         } else {
+            timeLeft -= 20;
             result.classList.remove(`hide`);
             result.textContent = `Incorrect!`;
             result.style.color = `red`;
@@ -95,7 +131,6 @@ answers.forEach((answer) => {
                 result.style.color = ``;
                 result.classList.add('hide');
                 selectChoice.classList.remove(resultsClass);
-                console.log(`display false//go back to neutral`);
                 getNewQuestion();
             }, 1000);
         }
@@ -121,30 +156,34 @@ submitBtn.addEventListener(`click`, (e) => {
     highScores.splice(maxHighScore);
 
     localStorage.setItem(`highScores`, JSON.stringify(highScores));
-    console.log(highScores);
 
     endGame.classList.add(`hide`);
-    topScore.classList.remove(`hide`);
+    topScores.classList.remove(`hide`);
 });
 
 // DISPLAY HIGH SCORES
+topScoresList.innerHTML = highScores
+    .map((scoreList) => `<li class="scoresList">${scoreList.name} - ${scoreList.score}</li>`)
+    .join(``);
+
 tryAgainBtn.addEventListener(`click`, () => {
-    console.log(`clicked tryAgainBtn`);
     localStorage.removeItem(`mostRecentScore`);
-    topScore.classList.add(`hide`);
+    topScores.classList.add(`hide`);
     landing.classList.remove(`hide`);
 });
 
 // Starts the Quiz
 function startGame() {
     localStorage.removeItem(`mostRecentScore`);
+    timer.textContent = `Ready?`;
     startBtn.addEventListener(`click`, () => {
         questionCounter = 0;
         score = 0;
-        getNewQuestion();
         landing.classList.add(`hide`);
         quiz.classList.remove(`hide`);
         hud.classList.remove(`hide`);
+        getNewQuestion();
+        timerCountdown();
     });
 }
 
